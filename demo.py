@@ -1,8 +1,10 @@
 from huggingface_hub import snapshot_download
-from datasets import load_dataset, load_from_disk
+import os
 
+current_dir = os.getcwd()
+print(current_dir)
 # 下载模型
-snapshot_download(repo_id="THUDM/chatglm3-6b", local_dir="/root/autodl-tmp/chatglm3-6b", local_dir_use_symlinks=False)
+snapshot_download(repo_id="THUDM/chatglm3-6b", local_dir="/chatglm3-6b", local_dir_use_symlinks=False)
 
 # 下载数据集
 # dataset = load_dataset("YeungNLP/firefly-train-1.1M")
