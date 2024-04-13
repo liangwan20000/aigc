@@ -14,6 +14,27 @@ from trainer import LoRATrainer
 # from arguments import ModelArguments, DataTrainingArguments, PeftArguments
 from data_preprocess import MultiTurnDataset
 from peft import get_peft_model, LoraConfig, TaskType
+from dataclasses import dataclass, field
+from typing import Optional
+
+@dataclass
+class PeftArguments:
+    lora_rank: int = field(
+        default=None,
+        metadata={"help": "LoRA rank number"}
+    )
+    lora_alpha: int = field(
+        default=32,
+        metadata={"help": "LoRA alpha weight"}
+    )
+    lora_dropout: float = field(
+        default=0.1,
+        metadata={"help": "LoRA dropout probability"}
+    )
+    lora_checkpoint: str = field(
+        default=None,
+        metadata={"help": "Path to LoRA checkpoints"}
+    )
 
 # 初始化日志记录
 logger = logging.getLogger(__name__)
@@ -70,12 +91,12 @@ def main():
         "validation_file": "./data/dev.chatglm3.jsonl", # 验证数据
         "max_seq_length": 3072
     }
-    peft_args = {
-        "lora_rank": 8, # "lora等级号"
-        "lora_alpha": 32, # "权重"
-        "lora_dropout": "丢失率" # 0.1 2>&1 | tee ${OUTPUT_DIR}/train.log
-    }
-    parser = HfArgumentParser((TrainingArguments))
+    # peft_args = {
+    #     "lora_rank": 8, # "lora等级号"
+    #     "lora_alpha": 32, # "权重"
+    #     "lora_dropout": "丢失率" # 0.1 2>&1 | tee ${OUTPUT_DIR}/train.log
+    # }
+    peft_args, parser = HfArgumentParser((PeftArguments, TrainingArguments))
     training_args = parser.parse_args_into_dataclasses()
     # 初始化工作
     setup_logger(training_args)
