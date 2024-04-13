@@ -86,7 +86,7 @@ def load_lora_model(model_args, peft_args):
 def main():
     # 解析传入的命令行参数
     model_args = {
-        "model_name_or_path": "chatglm3-6b"
+        "model_name_or_path": "/root/autodl-tmp/aigc/chatglm3-6b"
     }
     data_args = {
         "train_file": "./data/train.chatglm3.jsonl", # 训练数据
