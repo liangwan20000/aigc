@@ -96,8 +96,8 @@ def main():
     #     "lora_alpha": 32, # "权重"
     #     "lora_dropout": "丢失率" # 0.1 2>&1 | tee ${OUTPUT_DIR}/train.log
     # }
-    peft_args, parser = HfArgumentParser((PeftArguments, TrainingArguments))
-    training_args = parser.parse_args_into_dataclasses()
+    parser = HfArgumentParser((PeftArguments, TrainingArguments))
+    peft_args, training_args = parser.parse_args_into_dataclasses()
     # 初始化工作
     setup_logger(training_args)
     set_seed(training_args.seed)
