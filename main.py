@@ -61,9 +61,11 @@ def setup_logger(training_args):
     logger.info(f"Training/evaluation parameters {training_args}")
 
 def load_lora_model(model_args, peft_args):
+    print(model_args)
+    print(model_args["model_name_or_path"])
     # 加载预训练的chatglm3-6b的tokenizer和model
-    tokenizer = AutoTokenizer.from_pretrained(model_args.model_name_or_path, trust_remote_code=True)
-    model = AutoModel.from_pretrained(model_args.model_name_or_path, trust_remote_code=True)
+    tokenizer = AutoTokenizer.from_pretrained(model_args["model_name_or_path"], trust_remote_code=True)
+    model = AutoModel.from_pretrained(model_args["model_name_or_path"], trust_remote_code=True)
     model = model.half()
     # 使用peft库配置lora参数
     peft_config = LoraConfig(
