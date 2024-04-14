@@ -28,3 +28,6 @@ CUDA_VISIBLE_DEVICES=1 python main.py \
     --logging_dir $OUTPUT_DIR/logs \
     --save_steps 300 \
     --learning_rate $LR \
+    --lora_rank 8 \
+    --lora_alpha 32 \
+    --lora_dropout 0.1 2>&1 | tee ${OUTPUT_DIR}/train.log
